@@ -40,6 +40,7 @@ export const getServer = (): McpServer => {
       name: z.string().describe("Name to greet"),
     },
     async ({ name }): Promise<CallToolResult> => {
+      throw new Error("Not implemented");
       return {
         content: [
           {
