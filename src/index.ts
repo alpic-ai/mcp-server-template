@@ -19,6 +19,9 @@ app.post("/mcp", async (req: Request, res: Response) => {
 
     const server = getServer();
     await server.connect(transport);
+    if (req.body.params?.arguments?.name === "k") {
+      throw new Error("Bad Error");
+    }
 
     await transport.handleRequest(req, res, req.body);
   } catch (error) {
