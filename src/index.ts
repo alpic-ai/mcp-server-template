@@ -19,8 +19,21 @@ app.post("/mcp", async (req: Request, res: Response) => {
 
     const server = getServer();
     await server.connect(transport);
-    if (req.body.params?.arguments?.name === "k") {
+    if (req.body.params?.arguments?.name === "bad") {
       throw new Error("Bad Error");
+    }
+    if (req.body.params?.arguments?.name === "mcp") {
+      res.writeHead(400).end(
+        JSON.stringify({
+          jsonrpc: "2.0",
+          error: {
+            code: -32700,
+            message: "MCP Protocol Error",
+          },
+          id: null,
+        }),
+      );
+      return;
     }
 
     await transport.handleRequest(req, res, req.body);
